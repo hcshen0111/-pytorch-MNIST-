@@ -12,7 +12,7 @@ import torch.nn.functional as F
 train_dataset=torchvision.datasets.MNIST(root='./data',train=True, transform=transforms.ToTensor(), download=True)
 test_dataset=torchvision.datasets.MNIST(root='./data',train=False, transform=transforms.ToTensor(), download=True)
 
-#构建网络
+# 构建网络
 class FCnet(nn.Module):
     """A Neural Network with a hidden layer"""
     def __init__(self, input_size, hidden_size, output_size):
@@ -25,7 +25,7 @@ class FCnet(nn.Module):
         x = self.layer2(x) 
         return x
 
-#设置参数
+# 设置参数
 input_size = 784
 hidden_size = 500
 output_size = 10
@@ -43,14 +43,14 @@ total_step = len(train_loader)
 lossFunction = nn.CrossEntropyLoss()
 optimizer = torch.optim.SGD(model.parameters(), lr=learning_rate, momentum=0.8)
 
-#显示数据
+# 显示数据
 imgs, labels = next(iter(train_loader))
 img = imgs[0,:,:,:].numpy().squeeze(0)
 print('showing digit {}'.format(labels.numpy()[0]))
 plt.imshow(img)
 plt.show()
 
-#训练模型
+# 训练模型
 for epoch in range(num_epochs):
     for i, (img,labels) in enumerate(train_loader):
         img = img.view(img.size(0),-1)
@@ -65,7 +65,7 @@ for epoch in range(num_epochs):
         if (i+1) % 100 == 0:
         print('Epoch [{}/{}], Step [{}/{}], Loss: {:.4f}' .format(epoch+1, num_epochs, i+1, total_step, loss.item()))
 
-#test accuracy
+# test accuracy
 with torch.no_grad():
     correct = 0
     total = 0
